@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Notebook App　説明書</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Noto Sans JP',sans-serif;background:#f5f3ef;color:#1c1c1c;font-size:14px;line-height:1.8;}
+
+.page{max-width:860px;margin:0 auto;padding:40px 24px 80px;}
+
+.doc-header{background:#1c1c1c;color:#fff;border-radius:8px;padding:32px 36px;margin-bottom:36px;}
+.doc-header h1{font-size:22px;font-weight:700;letter-spacing:.04em;margin-bottom:8px;}
+.doc-header .sub{font-size:13px;color:#aaa;line-height:1.6;}
+.doc-header .badges{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;}
+.hbadge{font-size:11px;font-weight:700;padding:3px 11px;border-radius:10px;letter-spacing:.05em;}
+.hb-blue{background:#1e4d7a;color:#fff;}
+.hb-green{background:#1a5436;color:#fff;}
+.hb-gray{background:#444;color:#fff;}
+
+.toc{background:#fff;border:1px solid #ddd;border-radius:8px;padding:20px 24px;margin-bottom:32px;}
+.toc h2{font-size:12px;font-weight:700;letter-spacing:.1em;color:#888;margin-bottom:12px;}
+.toc ol{padding-left:20px;}
+.toc li{margin-bottom:5px;}
+.toc a{color:#1e4d7a;text-decoration:none;font-size:13px;}
+.toc a:hover{text-decoration:underline;}
+
+.section{background:#fff;border-radius:8px;padding:28px 32px;margin-bottom:20px;border:1px solid #e8e4de;}
+.section h2{font-size:17px;font-weight:700;color:#1e4d7a;margin-bottom:18px;padding-bottom:10px;border-bottom:2px solid #e6eef6;display:flex;align-items:center;gap:10px;}
+.section h2 .num{background:#1e4d7a;color:#fff;font-size:11px;font-weight:700;padding:2px 9px;border-radius:10px;letter-spacing:.05em;}
+.section h3{font-size:14px;font-weight:700;color:#1c1c1c;margin:20px 0 10px;}
+
+p{margin-bottom:10px;line-height:1.85;}
+
+ul,ol{padding-left:22px;margin-bottom:12px;}
+li{margin-bottom:5px;line-height:1.8;}
+ul li::marker{color:#1e4d7a;}
+
+.tbl-wrap{overflow-x:auto;margin-bottom:14px;}
+table{border-collapse:collapse;width:100%;font-size:13px;}
+th{background:#1e4d7a;color:#fff;padding:9px 14px;text-align:left;font-weight:700;white-space:nowrap;}
+td{border:1px solid #ddd;padding:8px 14px;background:#fff;line-height:1.7;}
+tr:nth-child(even) td{background:#f8f6f2;}
+code{background:#f0ede8;padding:1px 6px;border-radius:3px;font-family:monospace;font-size:12px;}
+
+.code-block{background:#1c1c1c;color:#e8e8e8;border-radius:6px;padding:14px 18px;font-family:monospace;font-size:12px;line-height:1.9;margin-bottom:14px;overflow-x:auto;}
+
+.box{border-radius:6px;padding:12px 16px;margin-bottom:14px;font-size:13px;line-height:1.85;}
+.box-warn{background:#fff8e8;border-left:4px solid #c8a040;}
+.box-info{background:#e6eef6;border-left:4px solid #1e4d7a;}
+.box-green{background:#e5f2eb;border-left:4px solid #1a5436;}
+.box strong{display:block;font-size:13px;margin-bottom:4px;}
+
+.badge{display:inline-block;padding:2px 8px;border-radius:8px;font-size:11px;font-weight:700;white-space:nowrap;vertical-align:middle;}
+.b-blue{background:#e6eef6;color:#1e4d7a;border:1px solid #a8c4e0;}
+.b-green{background:#e5f2eb;color:#1a5436;border:1px solid #8fcaa8;}
+.b-warn{background:#fff8e8;color:#7a5010;border:1px solid #d4aa80;}
+
+.steps{counter-reset:step;}
+.step{display:flex;gap:14px;margin-bottom:16px;align-items:flex-start;}
+.step-num{background:#1e4d7a;color:#fff;font-size:13px;font-weight:700;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-body{flex:1;}
+.step-body strong{display:block;font-size:14px;margin-bottom:3px;}
+.step-body p{font-size:13px;color:#4a4a4a;margin-bottom:0;}
+
+.faq-item{border-bottom:1px solid #eee;padding:14px 0;}
+.faq-item:last-child{border-bottom:none;}
+.faq-q{font-weight:700;color:#1e4d7a;margin-bottom:6px;}
+.faq-a{font-size:13px;color:#4a4a4a;line-height:1.8;}
+
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-bottom:16px;}
+.feature-card{border:1px solid #ddd;border-radius:8px;padding:14px 16px;background:#fafaf8;}
+.feature-card .fc-icon{font-size:20px;margin-bottom:6px;}
+.feature-card .fc-title{font-size:13px;font-weight:700;margin-bottom:4px;}
+.feature-card .fc-desc{font-size:12px;color:#4a4a4a;line-height:1.7;}
+
+.doc-footer{text-align:center;font-size:12px;color:#aaa;margin-top:48px;padding-top:24px;border-top:1px solid #ddd;}
+
+@media print{
+  body{background:#fff;}
+  .page{padding:0;}
+  .section{break-inside:avoid;border:1px solid #ccc;}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ヘッダー -->
+<div class="doc-header">
+  <h1>Notebook App　説明書</h1>
+  <div class="sub">
+    TODO管理・メモ・期限アラートをGitHub Gistに同期するWebアプリです。<br>
+    本書はセットアップから日常の使い方・Googleカレンダー連携まで一通りの手順を説明します。
+  </div>
+  <div class="badges">
+    <span class="hbadge hb-blue">GitHub Gist 自動同期</span>
+    <span class="hbadge hb-green">Googleカレンダー連携</span>
+    <span class="hbadge hb-gray">インストール不要</span>
+  </div>
+</div>
+
+<!-- 目次 -->
+<div class="toc">
+  <h2>目　次</h2>
+  <ol>
+    <li><a href="#about">このアプリについて</a></li>
+    <li><a href="#setup-token">GitHubトークンの取得</a></li>
+    <li><a href="#setup-login">アプリへのログイン</a></li>
+    <li><a href="#todo">TODOの使い方</a></li>
+    <li><a href="#due">期限・アラートの設定</a></li>
+    <li><a href="#gcal">Googleカレンダー連携</a></li>
+    <li><a href="#memo">メモの使い方</a></li>
+    <li><a href="#multidevice">別デバイスでの使い方</a></li>
+    <li><a href="#faq">よくある質問</a></li>
+    <li><a href="#notes">注意事項・セキュリティ</a></li>
+  </ol>
+</div>
+
+<!-- 1. このアプリについて -->
+<div class="section" id="about">
+  <h2><span class="num">1</span>このアプリについて</h2>
+  <p>ブラウザで動作するTODO管理・メモアプリです。データはGitHub Gistに自動同期されるため、スマホ・PC・タブレットなど<strong>どのデバイスからでも同じデータにアクセス</strong>できます。</p>
+
+  <div class="feature-grid">
+    <div class="feature-card">
+      <div class="fc-icon">✅</div>
+      <div class="fc-title">TODO管理</div>
+      <div class="fc-desc">タスクの追加・完了・削除・編集。作成日・更新日・完了日を自動記録。</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">📅</div>
+      <div class="fc-title">期限設定</div>
+      <div class="fc-desc">カレンダーUIで完了目標日を設定。期限切れ・残り3日以内は色で警告。</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🔔</div>
+      <div class="fc-title">アラート</div>
+      <div class="fc-desc">当日〜2週間前まで最大5件の通知タイミングを設定可能。</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">📆</div>
+      <div class="fc-title">Googleカレンダー連携</div>
+      <div class="fc-desc">期限をGoogleカレンダーに自動登録。アプリを閉じていてもスマホに通知が届く。</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🗒️</div>
+      <div class="fc-title">メモ</div>
+      <div class="fc-desc">カード形式で自由にメモを作成・編集。更新日時を自動記録。</div>
+    </div>
+    <div class="feature-card">
+      <div class="fc-icon">🔄</div>
+      <div class="fc-title">自動同期</div>
+      <div class="fc-desc">編集後1.2秒でGitHub Gistに自動保存。画面右上で同期状態を確認できる。</div>
+    </div>
+  </div>
+
+  <div class="box box-info">
+    <strong>動作環境</strong>
+    Chrome・Edge・Safari等の最新ブラウザ。インストール不要。以下のURLにアクセスするだけで使用できます。<br>
+    <code>https://rnakajimanms-blip.github.io/notebook-app/</code>
+  </div>
+</div>
+
+<!-- 2. GitHubトークンの取得 -->
+<div class="section" id="setup-token">
+  <h2><span class="num">2</span>GitHubトークンの取得</h2>
+  <p>アプリのデータ同期にはGitHubアカウントが必要です。GitHubアカウントがない場合は先に <a href="https://github.com" target="_blank">github.com</a> で無料登録してください。</p>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>トークン設定ページを開く</strong><p><a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> にアクセスします。</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>「Generate new token (classic)」をクリック</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>以下の内容を設定する</strong>
+      <div style="margin-top:8px">
+        <div class="tbl-wrap">
+          <table>
+            <thead><tr><th>項目</th><th>設定値</th></tr></thead>
+            <tbody>
+              <tr><td>Note</td><td>任意（例：<code>notebook-app</code>）</td></tr>
+              <tr><td>Expiration</td><td><code>No expiration</code>（期限なし）推奨</td></tr>
+              <tr><td>Scope</td><td><strong>gist</strong> にチェック ✅</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>「Generate token」をクリックしてトークンをコピーする</strong><p><code>ghp_</code> で始まる文字列が表示されます。必ずコピーして保存してください。</p></div></div>
+  </div>
+
+  <div class="box box-warn">
+    <strong>⚠ 注意</strong>
+    トークンはこの画面を閉じると二度と表示されません。必ずコピーしてメモ帳等に一時保存してください。
+  </div>
+</div>
+
+<!-- 3. アプリへのログイン -->
+<div class="section" id="setup-login">
+  <h2><span class="num">3</span>アプリへのログイン</h2>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>アプリURLをブラウザで開く</strong><p><code>https://rnakajimanms-blip.github.io/notebook-app/</code></p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>トークン入力画面にGitHubトークンを貼り付ける</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>「はじめる」をクリック</strong><p>自動的にGitHub Gistが作成され、データ同期が開始されます。</p></div></div>
+  </div>
+
+  <div class="box box-green">
+    <strong>✓ 次回以降は入力不要</strong>
+    トークンはブラウザに保存されるため、同じブラウザからは次回以降自動でログインされます。
+  </div>
+
+  <h3>トークンをリセットしたい場合</h3>
+  <p>アプリ右上の <span class="badge b-blue">⚙</span> ボタンをクリックするとトークン設定をリセットできます。再度トークンを入力すれば同じデータに再接続できます。</p>
+</div>
+
+<!-- 4. TODOの使い方 -->
+<div class="section" id="todo">
+  <h2><span class="num">4</span>TODOの使い方</h2>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>操作</th><th>方法</th></tr></thead>
+      <tbody>
+        <tr><td>タスク追加</td><td>画面上部の入力欄にテキストを入力して <code>Enter</code></td></tr>
+        <tr><td>完了にする</td><td>タスク左の丸ボタンをクリック（もう一度クリックで未完了に戻る）</td></tr>
+        <tr><td>テキスト編集</td><td>タスク名を直接クリックして編集 → フォーカスを外すと保存</td></tr>
+        <tr><td>期限・アラート設定</td><td>タスク右の 📅 ボタンをクリック</td></tr>
+        <tr><td>削除</td><td>タスク右の × ボタンをクリック</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>フィルター</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>フィルター</th><th>表示内容</th></tr></thead>
+      <tbody>
+        <tr><td><span class="badge b-blue">ALL</span></td><td>全タスクを表示</td></tr>
+        <tr><td><span class="badge b-blue">未完了</span></td><td>未完了のタスクのみ表示</td></tr>
+        <tr><td><span class="badge b-green">完了</span></td><td>完了済みのタスクのみ表示</td></tr>
+        <tr><td><span class="badge b-warn">期限切れ</span></td><td>期限を過ぎた未完了タスクのみ表示</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>日付チップの見方</h3>
+  <p>各タスクには以下の日付が自動で表示されます。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>チップ</th><th>内容</th></tr></thead>
+      <tbody>
+        <tr><td>作成 〇/〇</td><td>タスクを追加した日付（自動記録）</td></tr>
+        <tr><td>更新 〇/〇</td><td>テキスト編集・設定変更を行った日付（自動更新）</td></tr>
+        <tr><td>✓ 〇/〇</td><td>完了にした日付（完了時に自動記録）</td></tr>
+        <tr><td>📅 期限 〇/〇</td><td>設定した完了目標日</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 5. 期限・アラートの設定 -->
+<div class="section" id="due">
+  <h2><span class="num">5</span>期限・アラートの設定</h2>
+  <p>タスク右の 📅 ボタンをクリックすると設定モーダルが開きます。</p>
+
+  <h3>完了目標日の設定</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>カレンダーから日付をクリックして選択</strong><p>選択済みの日付をもう一度クリックすると解除できます。「× 日付をクリア」ボタンでも解除できます。</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>「保存」をクリック</strong></div></div>
+  </div>
+
+  <h3>期限の表示状態</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>表示</th><th>状態</th></tr></thead>
+      <tbody>
+        <tr><td>📅 期限 〇/〇（緑）</td><td>期限まで4日以上ある</td></tr>
+        <tr><td>⏰ 期限 〇/〇（オレンジ）</td><td>期限まで残り3日以内</td></tr>
+        <tr><td>⚠ 期限 〇/〇（赤）</td><td>期限切れ</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>アラートの設定</h3>
+  <p>「＋ アラートを追加」ボタンをクリックすると通知タイミングを追加できます。最大5件まで設定可能です。</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>選択肢</th><th>通知タイミング</th></tr></thead>
+      <tbody>
+        <tr><td>当日（朝9時）</td><td>期限日の朝9時</td></tr>
+        <tr><td>3時間前</td><td>期限日の朝9時の3時間前（6時）</td></tr>
+        <tr><td>半日前</td><td>期限日の前日21時</td></tr>
+        <tr><td>1日前</td><td>期限日の前日朝9時</td></tr>
+        <tr><td>2日前 / 3日前</td><td>それぞれ2日前・3日前の朝9時</td></tr>
+        <tr><td>1週間前 / 2週間前</td><td>それぞれ7日前・14日前の朝9時</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-warn">
+    <strong>⚠ ブラウザ通知の制限</strong>
+    ブラウザ通知はアプリを開いている間のみ機能します。アプリを閉じているときも通知を受け取るには、<strong>Googleカレンダー連携</strong>を使用してください。
+  </div>
+</div>
+
+<!-- 6. Googleカレンダー連携 -->
+<div class="section" id="gcal">
+  <h2><span class="num">6</span>Googleカレンダー連携</h2>
+  <p>Googleアカウントでログインすると、期限をGoogleカレンダーに自動登録できます。カレンダーアプリが通知を管理するため、<strong>アプリを閉じていてもスマホでも通知が届きます。</strong></p>
+
+  <h3>Googleログイン手順</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>アプリ右上の「Googleでログイン」をクリック</strong></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Googleアカウントを選択して許可する</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>「アプリは確認されていません」と表示された場合</strong><p>「詳細」→「notebook-appに移動（安全ではないページ）」をクリックしてください。</p></div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-body"><strong>右上に「連携中」と表示されれば完了</strong></div></div>
+  </div>
+
+  <div class="box box-info">
+    <strong>ログインは毎回必要です</strong>
+    GoogleのOAuthトークンはセキュリティ上ブラウザに保存できません。ただしアカウント選択のワンクリックで完了します。Googleカレンダー連携を使わない日はログインしなくてもアプリは通常通り使えます。
+  </div>
+
+  <h3>カレンダーへの登録手順</h3>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Googleログイン後、タスクの 📅 ボタンをクリック</strong></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>モーダル上部の「Googleカレンダー連携」トグルをONにする</strong></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>期限日・アラートを設定して「保存」をクリック</strong><p>Googleカレンダーに期限日のイベントが作成され、設定したアラートが通知時刻として登録されます。</p></div></div>
+  </div>
+
+  <h3>カレンダー連携の動作</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>操作</th><th>動作</th></tr></thead>
+      <tbody>
+        <tr><td>トグルON + 保存</td><td>Googleカレンダーにイベントを新規作成</td></tr>
+        <tr><td>期限日・アラートを変更して保存</td><td>旧イベントを削除 → 新イベントを作成</td></tr>
+        <tr><td>トグルOFFで保存</td><td>Googleカレンダーのイベントを削除</td></tr>
+        <tr><td>タスク削除</td><td>Googleカレンダーのイベントも自動削除</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- 7. メモの使い方 -->
+<div class="section" id="memo">
+  <h2><span class="num">7</span>メモの使い方</h2>
+  <p>画面上部の「MEMO」タブをクリックするとメモ画面に切り替わります。</p>
+
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>操作</th><th>方法</th></tr></thead>
+      <tbody>
+        <tr><td>メモ追加</td><td>「＋ 新しいメモ」ボタンをクリック</td></tr>
+        <tr><td>タイトル・本文の編集</td><td>カード内のテキストエリアを直接クリックして入力</td></tr>
+        <tr><td>削除</td><td>カード右下の × ボタンをクリック</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="box box-info">
+    メモは編集するたびに自動保存され、カード右下に更新日時が表示されます。
+  </div>
+</div>
+
+<!-- 8. 別デバイスでの使い方 -->
+<div class="section" id="multidevice">
+  <h2><span class="num">8</span>別デバイスでの使い方</h2>
+  <p>スマホ・タブレット・別のPCなど、どのデバイスからでも同じデータにアクセスできます。</p>
+
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div class="step-body"><strong>アプリURLをブラウザで開く</strong><p><code>https://rnakajimanms-blip.github.io/notebook-app/</code></p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-body"><strong>GitHubトークンを入力して「はじめる」</strong><p>最初に取得したトークンを入力してください。</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-body"><strong>自動的に既存データが読み込まれる</strong></div></div>
+  </div>
+
+  <div class="box box-green">
+    <strong>✓ データは個人のGistに保存</strong>
+    各ユーザーのデータはそれぞれ自分のGitHub Gistに保存されます。他のユーザーのデータと混在することはありません。
+  </div>
+</div>
+
+<!-- 9. よくある質問 -->
+<div class="section" id="faq">
+  <h2><span class="num">9</span>よくある質問</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">Q. 「保存失敗」と表示される</div>
+    <div class="faq-a">GitHubトークンが期限切れか削除されている可能性があります。<a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a> でトークンの状態を確認し、必要であれば新しいトークンを発行してください。その後、アプリ右上の ⚙ ボタンでトークンをリセットして再入力してください。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q. 別デバイスで開いてもデータが表示されない</div>
+    <div class="faq-a">同じGitHubトークンを入力しているか確認してください。異なるトークンを入力すると別のGistが作成され、データが分かれてしまいます。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q. Googleカレンダーに通知が届かない</div>
+    <div class="faq-a">スマホのGoogleカレンダーアプリの通知設定が許可されているか確認してください。また、カレンダー連携トグルがONになっているタスクのみカレンダーに登録されます。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q. Googleログインで「アプリは確認されていません」と表示される</div>
+    <div class="faq-a">テスト公開中のアプリのため表示される警告です。「詳細」→「notebook-appに移動（安全ではないページ）」をクリックして進めてください。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q. トークンを紛失した</div>
+    <div class="faq-a">新しいトークンを発行してください（<a href="https://github.com/settings/tokens" target="_blank">github.com/settings/tokens</a>）。既存のGistに再接続するには、同じスコープ（gist）で発行したトークンを入力するだけで自動的に既存データが読み込まれます。</div>
+  </div>
+  <div class="faq-item">
+    <div class="faq-q">Q. データを削除したい</div>
+    <div class="faq-a">アプリ上でタスク・メモを削除するとGistのデータも自動で更新されます。Gist自体を削除したい場合は <a href="https://gist.github.com" target="_blank">gist.github.com</a> から手動で削除してください。</div>
+  </div>
+</div>
+
+<!-- 10. 注意事項・セキュリティ -->
+<div class="section" id="notes">
+  <h2><span class="num">10</span>注意事項・セキュリティ</h2>
+
+  <div class="box box-warn">
+    <strong>⚠ ご利用前にご確認ください</strong>
+    <ul>
+      <li>GitHubトークンはこのアプリのHTMLファイルには含まれず、<strong>各自のブラウザにのみ保存</strong>されます</li>
+      <li>データはPrivate Gistに保存されるため、<strong>本人のみアクセス可能</strong>です</li>
+      <li>トークンを他人に渡さないようにしてください</li>
+      <li>公共のPCで使用した場合は、使用後にブラウザのlocalStorageをクリアすることを推奨します</li>
+      <li>Googleカレンダー連携はテスト公開中のため、利用できるユーザーはGoogleアカウントの持ち主本人のみです</li>
+    </ul>
+  </div>
+
+  <h3>データの取り扱い</h3>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>データ</th><th>保存場所</th><th>アクセス権</th></tr></thead>
+      <tbody>
+        <tr><td>TODOデータ・メモ</td><td>GitHub Gist（Private）</td><td>本人のみ</td></tr>
+        <tr><td>GitHubトークン</td><td>ブラウザのlocalStorage</td><td>そのブラウザのみ</td></tr>
+        <tr><td>Googleアクセストークン</td><td>保存なし（毎回発行）</td><td>—</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="doc-footer">
+  ご不明な点はアプリ提供者までお問い合わせください。
+</div>
+
+</div>
+</body>
+</html>
